@@ -4,7 +4,7 @@ import { useLoadingState } from "../../stores/data-load";
 const token = localStorage.getItem('token')
 //create axios instance
 const apiClient = axios.create({
-    baseURL: '',
+    baseURL: '/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
