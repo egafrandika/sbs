@@ -4,7 +4,7 @@ import { useLoadingState } from "../../stores/data-load";
 const token = localStorage.getItem('token')
 //create axios instance
 const apiClient = axios.create({
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
