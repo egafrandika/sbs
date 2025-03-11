@@ -4,11 +4,6 @@
   functions = "netlify/functions"
   publish = "dist"
 
-[dev]
-   command = "npm run dev"
-   port = 5173
-   publish = "dist"
-
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
 [[redirects]]
