@@ -17,10 +17,6 @@
     status = 200
     force = true
 
-[context.production.environment]
-  VITE_API_BASE_URL = "/api"
-
-
 [[headers]]
   for = "/api/*"
   [headers.values]
