@@ -13,9 +13,13 @@
 
 [[redirects]]
     from = "/api/*"
-    to = "http://103.63.25.188:9000/:splat"
+    to = "http://103.63.25.188:9000/api/:splat"
     status = 200
     force = true
+
+[context.production.environment]
+  VITE_API_BASE_URL = "/api"
+
 
 [[headers]]
   for = "/api/*"
