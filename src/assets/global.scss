@@ -1,0 +1,61 @@
+$screen-sm: 567px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+$screen-xxl: 1400px;
+
+.gap-10 {
+    gap: 10px;
+}
+
+.mr-2 {
+    margin-right: 2px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+
+.ml-2 {
+    margin-left: 2px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.page-title {
+    border-bottom: 1px solid rgb(235, 237, 240);
+    margin: 0;
+    padding: 10px 0;
+}
+
+.title-header {
+    height: 30px;
+    width: 15px;
+    margin-right: 10px;
+    background-color: #1a4acd;
+}
