@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import path from 'path';
 // import API_BASE_URL from './src/services/axios/stages';
 
 export default defineConfig(({ mode }) => {
@@ -26,8 +27,12 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
+        '/api': {
           target: env.VITE_API_BASE_URL,
           changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        },
       },
     },
   };

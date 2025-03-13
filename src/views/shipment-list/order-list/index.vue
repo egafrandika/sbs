@@ -47,7 +47,15 @@
                     :key="idx"
                     :label="getLabel(idx) || idx"
                 >
-                    {{ formatText(idx, data) }}
+                    <template v-if="idx === 'portDisbursementsMap'">
+                        <div v-for="(amount, item) in data" :key="item">
+                            <span>{{ item }}:</span> {{formatAmountIdr(amount)}}
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        {{ formatText(idx, data) }}
+                    </template>
                 </a-descriptions-item>
             </a-descriptions>
         </a-modal>
@@ -57,6 +65,7 @@
 
 import OrderApi from '../../../common/resource/master-data';
 import {orderColumns, detailColumns} from './constant/fields';
+import {formatAmountIdr} from '../../../common/utils/format';
 
 export default {
     name: 'OrderList',
@@ -80,6 +89,7 @@ export default {
     },
 
     methods: {
+      formatAmountIdr,
         async getData() {
             const {totalPages, size, content} = await OrderApi.createList();
             this.orderList = content;
