@@ -26,11 +26,8 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
-          target: env.VITE_API_BASE_URL || 'http://103.63.25.188:9000',
+          target: env.VITE_API_BASE_URL,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
       },
     },
   };

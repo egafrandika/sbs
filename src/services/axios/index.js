@@ -13,8 +13,6 @@ const apiClient = axios.create({
     },
 });
 
-// apiClient.defaults.headers.Authorization = `Bearer ${newToken}`;
-
 // interceptor spin
 apiClient.interceptors.request.use((config) => {
   const loadingStore = useLoadingState();

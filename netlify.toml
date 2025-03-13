@@ -13,7 +13,7 @@
 
 [[redirects]]
     from = "/api/*"
-    to = "http://103.63.25.188:9000/:splat"
+    to = "https://sbsdev.ahlikode.com/:splat"
     status = 200
     force = true
 
