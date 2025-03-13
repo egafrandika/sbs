@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useLoadingState } from "../../stores/data-load";
-import API_BASE_URL from './stages';
+// import API_BASE_URL from './stages';
 
 const token = localStorage.getItem('token')
 //create axios instance
 const apiClient = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
