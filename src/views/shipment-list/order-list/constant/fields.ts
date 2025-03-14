@@ -56,7 +56,7 @@ export const detailColumns: TableColumnsType = [
     { title: 'Total BEP', dataIndex: 'totalBep', customRender: numberWithComma},
     { title: 'Total Initial Freight', dataIndex: 'totalInitialFreight', customRender: numberWithCommaIdr},
     { title: 'Total Initial Margin', dataIndex: 'totalInitialMargin', customRender: numberWithCommaIdr},
-    { title: 'Operator', key: 'operation', fixed: 'right'}
+    { title: 'Operator', key: 'operation', fixed: 'right'},
 ];
 
 export const orderColumns: TableColumnsType = [

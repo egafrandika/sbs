@@ -13,7 +13,6 @@
         v-model:openKeys="openKeys"
         theme="dark"
         mode="inline"
-        :inline-collapsed="collapsed"
       >
         <template v-for="item in menuItems">
           <a-sub-menu v-if="item.children" :key="item.path">
@@ -86,6 +85,7 @@ import router from '../../router';
 import SearchBar from '../search-bar';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
 import Login from '../../views/login';
+import {isMobileMd} from '../../common/utils/screen';
 
 export default {
   name: 'LayoutDashboard',
@@ -103,7 +103,7 @@ export default {
 
   data() {
     return {
-      collapsed: false,
+      collapsed: isMobileMd(),
       selectedKeys: [],
       openKeys: [],
       menuItems: [],
@@ -133,7 +133,16 @@ export default {
         this.storedOpenKeys = [...this.openKeys];
         this.openKeys = [];
       }
+    },
+    isMobileMd(newVal) {
+      this.collapsed = newVal;
     }
+  },
+
+  computed: {
+      isMobileMd() {
+        return isMobileMd();
+      }
   },
 
   mounted() {

@@ -14,8 +14,10 @@
             Create List
         </a-button>
         <a-table
-            :scroll="{ x: 5000 }"
+            :size="tableSize"
+            :scroll="{ x: 'max-content' }"
             :dataSource="orderList"
+            tableLayout="auto"
             :columns="columns"
             bordered
         >
@@ -83,9 +85,15 @@ export default {
         }
     },
 
+    computed: {
+        tableSize() {
+          const isMobile = window.innerWidth <= 768;
+          return isMobile ? 'small' : 'large';
+        }
+    },
+
     mounted() {
         this.getData();
-        console.log(this);
     },
 
     methods: {
