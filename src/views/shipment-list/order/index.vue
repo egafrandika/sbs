@@ -17,72 +17,72 @@
             :validate-messages="validateMessages"
             name="nest-messages"
         >
-            <a-form-item 
-                name="vesselId" 
-                label="Vessel ID" 
+            <a-form-item
+                name="vesselId"
+                label="Vessel ID"
                 :rules="[{ required: true }]"
             >
                 <a-input
                     v-model:value="formState.vesselId"
                 />
             </a-form-item>
-            <a-form-item 
-                name="captainId" 
-                label="Captain ID" 
+            <a-form-item
+                name="captainId"
+                label="Captain ID"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.captainId"
                 />
             </a-form-item>
-            <a-form-item 
-                name="cargo" 
-                label="Cargo" 
+            <a-form-item
+                name="cargo"
+                label="Cargo"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.cargo"
                 />
             </a-form-item>
-            <a-form-item 
-                name="diesel" 
-                label="Diesel" 
+            <a-form-item
+                name="diesel"
+                label="Diesel"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.diesel"
                 />
             </a-form-item>
-            <a-form-item 
-                name="meFuelOnBallast" 
-                label="ME Fuel on Ballast" 
+            <a-form-item
+                name="meFuelOnBallast"
+                label="ME Fuel on Ballast"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.meFuelOnBallast"
                 />
             </a-form-item>
-            <a-form-item 
-                name="meFuelOnLaden" 
-                label="ME Fuel on Laden" 
+            <a-form-item
+                name="meFuelOnLaden"
+                label="ME Fuel on Laden"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.meFuelOnLaden"
                 />
             </a-form-item>
-            <a-form-item 
-                name="aeFuel" 
-                label="AE Fuel" 
+            <a-form-item
+                name="aeFuel"
+                label="AE Fuel"
                 :rules="[{ required: true }]"
             >
-                <a-input 
+                <a-input
                     v-model:value="formState.aeFuel"
                 />
             </a-form-item>
             <a-form-item>
-                <a-button 
-                    type="primary" 
+                <a-button
+                    type="primary"
                     html-type="submit"
                     @click="submitVessel"
                 >
@@ -93,7 +93,7 @@
 
         <!-- Seiling -->
         <a-row v-if="current === 1" class="gap-10">
-            <a-col :span="12">
+            <a-col :span="isMobile ? 24 : 12">
                 <a-form
                     ref="sailingRef"
                     :model="formSailing"
@@ -102,62 +102,62 @@
                     :validate-messages="validateSailing"
                     name="nest-messages"
                 >
-                    <a-form-item 
-                        name="id" 
+                    <a-form-item
+                        name="id"
                         label="ID"
                     >
-                        <a-input 
+                        <a-input
                             disabled
                             v-model:value="formSailing.id"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="originPortId" 
-                        label="Origin Port ID" 
+                    <a-form-item
+                        name="originPortId"
+                        label="Origin Port ID"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formSailing.originPortId"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="originToDestinationSpeed" 
-                        label="Origin to Destionation Speed" 
+                    <a-form-item
+                        name="originToDestinationSpeed"
+                        label="Origin to Destionation Speed"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formSailing.originToDestinationSpeed"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="destinationPortId" 
-                        label="Destination Port ID" 
+                    <a-form-item
+                        name="destinationPortId"
+                        label="Destination Port ID"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formSailing.destinationPortId"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="destinationToOriginSpeed" 
-                        label="Destination To Origin Speed" 
+                    <a-form-item
+                        name="destinationToOriginSpeed"
+                        label="Destination To Origin Speed"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formSailing.destinationToOriginSpeed"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="distance" 
-                        label="Distance" 
+                    <a-form-item
+                        name="distance"
+                        label="Distance"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formSailing.distance"
                         />
-                    </a-form-item>            
+                    </a-form-item>
                     <a-form-item>
-                        <a-button 
+                        <a-button
                             type="primary"
                             html-type="submit"
                             @click="onSailing"
@@ -169,62 +169,59 @@
             </a-col>
 
             <!-- showing calcualtion -->
-            <a-col :span="11">
+            <a-col :span="isMobile ? 24 : 11">
                 <div style="display: flex; align-items: center; padding: 0 0 20px;">
                     <div class="title-header"></div>
                     <span>Calculation Result</span>
                 </div>
-
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="originToDestinationDay" 
-                    label="Origin To Destination Day"
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formSailing.originToDestinationDay"
-                    />
-                </a-form-item>
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="destinationToOriginDay" 
-                    label="Destination To Origin Day" 
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formSailing.destinationToOriginDay"
-                    />
-                </a-form-item>
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="totalDistance" 
-                    label="Total Distance" 
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formSailing.totalDistance"
-                    />
-                </a-form-item>
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="totalSailDay" 
-                    label="Total Sail Days" 
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formSailing.totalSailDay"
-                    />
-                </a-form-item>
-            </a-col>    
+                <a-form>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="originToDestinationDay"
+                        label="Origin To Destination Day"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formSailing.originToDestinationDay"
+                        />
+                    </a-form-item>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="destinationToOriginDay"
+                        label="Destination To Origin Day"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formSailing.destinationToOriginDay"
+                        />
+                    </a-form-item>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="totalDistance"
+                        label="Total Distance"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formSailing.totalDistance"
+                        />
+                    </a-form-item>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="totalSailDay"
+                        label="Total Sail Days"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formSailing.totalSailDay"
+                        />
+                    </a-form-item>
+                </a-form>
+            </a-col>
         </a-row>
 
         <!-- port -->
         <a-row v-if="current === 2" class="gap-10">
-            <a-col :span="12">
+            <a-col :span="isMobile ? 24 : 12">
                 <a-form
                     ref="portRef"
                     :model="formPort"
@@ -233,44 +230,44 @@
                     :validate-messages="validateSailing"
                     name="nest-messages"
                 >
-                    <a-form-item 
-                        name="originIdleDay" 
-                        label="Origin Idle Day" 
+                    <a-form-item
+                        name="originIdleDay"
+                        label="Origin Idle Day"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formPort.originIdleDay"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="originLoadingRate" 
-                        label="Origin Loading Rate" 
+                    <a-form-item
+                        name="originLoadingRate"
+                        label="Origin Loading Rate"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formPort.originLoadingRate"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="destinationIdleDay" 
-                        label="Destination Idle Day" 
+                    <a-form-item
+                        name="destinationIdleDay"
+                        label="Destination Idle Day"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formPort.destinationIdleDay"
                         />
                     </a-form-item>
-                    <a-form-item 
-                        name="destinationDischargeRate" 
-                        label="Destination Discharge Rate" 
+                    <a-form-item
+                        name="destinationDischargeRate"
+                        label="Destination Discharge Rate"
                         :rules="[{ required: true }]"
                     >
-                        <a-input 
+                        <a-input
                             v-model:value="formPort.destinationDischargeRate"
                         />
                     </a-form-item>
                     <a-form-item>
-                        <a-button 
+                        <a-button
                             type="primary"
                             html-type="submit"
                             @click="onPort"
@@ -282,39 +279,41 @@
             </a-col>
 
             <!-- showing calcualtion -->
-            <a-col :span="11">
-                <div style="display: flex; align-items: center; padding: 0 20px;">
+            <a-col :span="isMobile ? 24 : 11">
+                <div style="display: flex; align-items: center; padding: 0 0 20px;">
                     <div class="title-header"></div>
                     <span>Calculation Result</span>
                 </div>
-
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="totalWorkingDay" 
-                    label="Total Working Day"
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formPort.totalWorkingDay"
-                    />
-                </a-form-item>
-                <a-form-item 
-                    :label-col="labelColSailing"
-                    name="totalDays" 
-                    label="Total Days" 
-                    :rules="[{ required: true }]"
-                >
-                    <a-input 
-                        disabled
-                        v-model:value="formPort.totalDays"
-                    />
-                </a-form-item>
-            </a-col>    
+                <a-form>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="totalWorkingDay"
+                        label="Total Working Day"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formPort.totalWorkingDay"
+                        />
+                    </a-form-item>
+                    <a-form-item
+                        :label-col="labelColSailing"
+                        name="totalDays"
+                        label="Total Days"
+                    >
+                        <a-input
+                            disabled
+                            v-model:value="formPort.totalDays"
+                        />
+                    </a-form-item>
+                </a-form>
+            </a-col>
         </a-row>
         <div v-if="current === 3">
             <a-table
                 bordered
+                :scroll="{
+                    x: 'max-content'
+                }"
                 :dataSource="dataBunker"
                 :columns="columnsBunker"
                 :pagination="false"
@@ -327,6 +326,9 @@
 
             <a-table
                 bordered
+                :scroll="{
+                    x: 'max-content'
+                }"
                 :dataSource="dataFuelCost"
                 :columns="columnsFuelCost"
                 :pagination="false"
@@ -342,7 +344,7 @@
             v-if="current === 4"
             class="gap-10"
         >
-            <a-col :span="12">
+            <a-col :span="isMobile ? 24 : 12">
                 <a-form
                     ref="disbursementsRef"
                     :model="formDisbursements"
@@ -371,27 +373,27 @@
                         style="display: flex; margin-bottom: 8px; justify-content: flex-end;"
                         align="baseline"
                     >
-                        <a-form-item 
+                        <a-form-item
                             :name="['portDisbursements', key, 'label']"
                             :rules="[{required: true, message: 'Required'}]"
                         >
                             <a-input v-model:value="user.label" placeholder="Masukkan text"/>
                         </a-form-item>
 
-                        <a-form-item 
+                        <a-form-item
                             :name="['portDisbursements', key, 'value']"
                             :rules="[{required: true, message: 'Required'}]"
                         >
                             <a-input
                                 type="number"
                                 v-model:value="user.value"
-                                placeholder="Masukkan nilai" 
+                                placeholder="Masukkan nilai"
                             />
                         </a-form-item>
                         <MinusCircleOutlined @click="removeUser(user)" />
                     </a-space>
                     <a-form-item>
-                        <a-button 
+                        <a-button
                             type="dashed"
                             block
                             @click="addUser"
@@ -401,7 +403,7 @@
                         </a-button>
                     </a-form-item>
                     <a-form-item>
-                        <a-button 
+                        <a-button
                             type="primary"
                             html-type="submit"
                             @click="onDisbursements"
@@ -411,9 +413,12 @@
                     </a-form-item>
                 </a-form>
             </a-col>
-            <a-col :span="11">
+            <a-col :span="isMobile ? 24 : 11">
                 <a-table
                     bordered
+                    :scroll="{
+                        x: 'max-content'
+                    }"
                     :dataSource="dataDisbursements"
                     :columns="columnsDisbursements"
                     :pagination="false"
@@ -427,11 +432,12 @@
 
         <!-- step -->
         <div class="steps-action">
-            <a-button 
-                v-if="current < steps.length - 1" 
-                :disabled="onDisabled"    
+            <a-button
+                v-if="current < steps.length - 1"
+                :disabled="onDisabled"
                 type="primary"
-                @click="next">
+                @click="next"
+            >
                     Next
             </a-button>
             <a-button
@@ -442,8 +448,8 @@
             >
                 Done
             </a-button>
-            <a-button 
-                v-if="current > 0" 
+            <a-button
+                v-if="current > 0"
                 style="margin-left: 8px"
                 @click="prev"
             >
@@ -456,6 +462,7 @@
 <script>
 
 import OrderApi from '../../../common/resource/master-data';
+import {isMobileMd} from '../../../common/utils/screen';
 
 const labelCol = {span: 6};
 const wrapperCol = { span: 12};
@@ -473,8 +480,9 @@ export default {
 
     data() {
         return {
+            isMobile: isMobileMd(),
             recordsData: null,
-            current: 0,
+            current: 4,
             formState: {},
             formSailing: {},
             formPort: {},
@@ -554,7 +562,7 @@ export default {
                 { title: 'Total AE Fuel Cost on Destination Discharge', dataIndex: 'totalAeFuelCostOnDestinationDischarge'},
                 { title: 'Total Fuel Cost', dataIndex: 'totalFuelCost'}
             ],
-            dataDisbursements: [ 
+            dataDisbursements: [
                 {
                     portDisbursementsTotal: null,
                     tcCostMonthly: null,
@@ -698,7 +706,7 @@ export default {
             try {
                 await this.$refs.disbursementsRef.validate();
                 const res = await OrderApi.createOrder(params);
-                this.dataDisbursements = [ 
+                this.dataDisbursements = [
                     {
                         portDisbursementsTotal: res.portDisbursementsTotal,
                         tcCostMonthly: res.tcCostMonthly,
@@ -760,6 +768,7 @@ export default {
 
         .steps-action {
             display: absolute;
+            padding: 20px 0;
             bottom: 0;
         }
     }

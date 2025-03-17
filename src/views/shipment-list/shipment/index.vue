@@ -85,7 +85,6 @@
                         name="dynamic_rule"
                         @finish="handleOk"
                     >
-<!--                      ok-->
                         <a-form-item
                             label="Tipe"
                             name="type"
