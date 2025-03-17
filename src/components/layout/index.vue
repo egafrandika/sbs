@@ -1,78 +1,93 @@
 <template>
   <a-layout v-if="isAuthenticated">
     <a-layout-sider
-      v-model:collapsed="collapsed"
-      :trigger="null"
-      collapsible
+        :style="{display: isMobileMd ? 'none' : '' }"
+        v-model:collapsed="collapsed"
+        :trigger="null"
+        collapsible
     >
-      <div class="logo">
-        SBS
-      </div>
-      <a-menu
-        v-model:selectedKeys="selectedKeys"
-        v-model:openKeys="openKeys"
-        theme="dark"
-        mode="inline"
-      >
-        <template v-for="item in menuItems">
-          <a-sub-menu v-if="item.children" :key="item.path">
-            <template #title>
-              <component :is="item.icon" />
-              <span>{{ item.label }}</span>
+        <div class="logo">
+            SBS
+        </div>
+        <a-menu
+            v-model:selectedKeys="selectedKeys"
+            v-model:openKeys="openKeys"
+            theme="dark"
+            mode="inline"
+        >
+            <template
+                v-for="item in menuItems"
+            >
+                <a-sub-menu
+                    v-if="item.children"
+                    :key="item.path"
+                >
+                    <template #title>
+                        <component :is="item.icon" />
+                        <span>{{ item.label }}</span>
+                    </template>
+
+                    <a-menu-item
+                        v-for="child in item.children"
+                        :key="child.path"
+                    >
+                        <router-link :to="child.path">
+                            <component :is="child.icon" />
+                            <span>{{ child.label }}</span>
+                        </router-link>
+                    </a-menu-item>
+                </a-sub-menu>
+
+                <a-menu-item
+                    v-else
+                    :key="item.index"
+                >
+                    <router-link :to="item.path">
+                        <component :is="item.icon" />
+                        <span>{{ item.label }}</span>
+                    </router-link>
+                </a-menu-item>
             </template>
-
-            <a-menu-item v-for="child in item.children" :key="child.path">
-              <router-link :to="child.path">
-                <component :is="child.icon" />
-                <span>{{ child.label }}</span>
-              </router-link>
-            </a-menu-item>
-          </a-sub-menu>
-
-          <a-menu-item v-else :key="item.index">
-            <router-link :to="item.path">
-              <component :is="item.icon" />
-              <span>{{ item.label }}</span>
-            </router-link>
-          </a-menu-item>
-        </template>
-      </a-menu>
+        </a-menu>
     </a-layout-sider>
 
     <a-layout>
-      <a-layout-header
-        style="background: #fff;
-        padding: 0; z-index: 10;
-        display: flex;
-        justify-content: space-between;"
-      >
-      <div style="display: flex; align-items: center; text-align: center">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="toggleCollapsed"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="toggleCollapsed"
-        />
-        <SearchBar />
-      </div>
-        <BtnUser class="btnUser"/>
-      </a-layout-header>
-      <a-layout-content
-        :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '100vh' }"
-      >
-        <Breadcrumb class="breadcrumb"/>
-        <a-spin v-if="useLoading.isLoading" size="large" class="mid-spin"/>
-        <router-view class="router"/>
-        <Watermark />
-      </a-layout-content>
-      <Footer />
+        <a-layout-header
+            style="background: #fff;
+            padding: 0; z-index: 10;
+            display: flex;
+            justify-content: space-between;"
+        >
+        <div style="display: flex; align-items: center; text-align: center">
+            <menu-unfold-outlined
+                :style="{display: isMobileMd ? 'none' : '' }"
+                v-if="collapsed"
+                class="trigger"
+                @click="toggleCollapsed"
+            />
+            <menu-fold-outlined
+                :style="{display: isMobileMd ? 'none' : '' }"
+                v-else
+                class="trigger"
+                @click="toggleCollapsed"
+            />
+            <SearchBar />
+        </div>
+              <BtnUser class="btnUser"/>
+        </a-layout-header>
+            <a-layout-content
+              :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '100vh' }"
+            >
+                <Breadcrumb class="breadcrumb"/>
+                <a-spin v-if="useLoading.isLoading" size="large" class="mid-spin"/>
+                <router-view class="router"/>
+                <Watermark />
+            </a-layout-content>
+        <Footer />
     </a-layout>
   </a-layout>
   <login v-else/>
+  <drawer v-if="isAuthenticated"/>
 </template>
 
 <script>
@@ -81,9 +96,10 @@ import Footer from '../footer';
 import BtnUser from '../logout';
 import Breadcrumb from '../breadcrumb';
 import Watermark from '../watermark';
+import Drawer from '../drawer';
 import router from '../../router';
 import SearchBar from '../search-bar';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
+import { MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons-vue';
 import Login from '../../views/login';
 import {isMobileMd} from '../../common/utils/screen';
 
@@ -98,7 +114,8 @@ export default {
     BtnUser,
     Footer,
     Login,
-    SearchBar
+    SearchBar,
+    Drawer
   },
 
   data() {
@@ -149,31 +166,31 @@ export default {
     this.generateMenuItems();
   },
 
-  methods: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
-    },
+    methods: {
+        toggleCollapsed() {
+          this.collapsed = !this.collapsed;
+        },
 
-    generateMenuItems() {
-      this.menuItems = router.options.routes
-      .filter(route => !route?.meta.hidden)
-      .map(route => {
-        const item = {
-          path: route.path,
-          label: route.meta?.label,
-          icon: route.meta?.icon,
-          children: route.children
-          ?.filter(route => !route.meta.hidden)
-          .map(child => ({
-            path: `${route.path.replace(/\/$/, '')}/${child.path.replace(/^\//, '')}`,
-            label: child.meta?.label,
-            icon: child.meta?.icon,
-          })) || null
-        };
-        return item;
-      });
+        generateMenuItems() {
+            this.menuItems = router.options.routes
+            .filter(route => !route?.meta.hidden)
+            .map(route => {
+                const item = {
+                    path: route.path,
+                    label: route.meta?.label,
+                    icon: route.meta?.icon,
+                    children: route.children
+                    ?.filter(route => !route.meta.hidden)
+                    .map(child => ({
+                        path: `${route.path.replace(/\/$/, '')}/${child.path.replace(/^\//, '')}`,
+                        label: child.meta?.label,
+                        icon: child.meta?.icon,
+                    })) || null
+              };
+              return item;
+            });
+        }
     }
-  }
 };
 </script>
 

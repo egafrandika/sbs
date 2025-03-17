@@ -15,6 +15,7 @@
         </a-button>
         <a-table
             :size="tableSize"
+            :class="$options.isMobile ? 'small-row' : ''"
             :scroll="{ x: 'max-content' }"
             :dataSource="orderList"
             tableLayout="auto"
@@ -69,8 +70,12 @@ import OrderApi from '../../../common/resource/master-data';
 import {orderColumns, detailColumns} from './constant/fields';
 import {formatAmountIdr} from '../../../common/utils/format';
 
+const isMobile = window.innerWidth <= 768;
+
 export default {
     name: 'OrderList',
+
+    isMobile,
 
     data() {
         return {
@@ -87,7 +92,6 @@ export default {
 
     computed: {
         tableSize() {
-          const isMobile = window.innerWidth <= 768;
           return isMobile ? 'small' : 'large';
         }
     },
@@ -137,4 +141,9 @@ export default {
 
 <style lang="scss" scoped>
 @use '/src/assets/global.scss';
+.small-row {
+    :deep(.ant-table) {
+      font-size: 10px;
+    }
+}
 </style>

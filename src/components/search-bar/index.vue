@@ -1,6 +1,7 @@
 <template>
     <a-space direction="vertical">
         <a-cascader
+            class="search-bar"
             v-model:value="value"
             :options="options"
             :show-search="{ filter }"
@@ -32,17 +33,17 @@ export default {
             return this.flattenRoutes(this.$router.options.routes);
         },
     },
-    
+
     methods: {
         flattenRoutes(routes, parentLabel = '') {
             return routes.reduce((acc, route) => {
                 if (route.meta?.hidden) return acc;
-                
+
                 const label = parentLabel ? `${parentLabel} > ${route.meta?.label || ''}` : route.meta?.label;
                 if (route.meta?.label) {
                     acc.push({ value: route.name, label });
                 }
-                
+
                 if (route.children) {
                     acc.push(...this.flattenRoutes(route.children, label));
                 }
@@ -62,3 +63,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.search-bar {
+  margin: 0 18px;
+}
+</style>
